@@ -16,6 +16,8 @@
  *  charCount(1234) // should return 0, null, {}, or ?
  */
 
+import mesurePerformance from "../mesurePerformance"
+
 type RetrunType = Record<string, number>
 
 const charCount = (str: string): RetrunType => {
@@ -74,16 +76,4 @@ const charCountRefactored = (str: string): RetrunType => {
     return object
 }
 
-const firstNow = performance.now()
-// This loop is just to simulate slow calculations
-for (let i = 0; i < 100000; i++) {
-    var ii = Math.sqrt(i)
-}
-const secondNow = performance.now()
-
-const howLongDidOurLoopTake = secondNow - firstNow
-console.log(howLongDidOurLoopTake)
-
-console.log(charCountRefactored("aaaa")) //   {a: 4}
-console.log(charCountRefactored("Hello")) //  { H: 1, e: 1, l: 2, o: 1 }
-console.log(charCountRefactored("My phone number is 060818938"))
+mesurePerformance(() => charCountRefactored("My phone number is 060818938"))
