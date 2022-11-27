@@ -44,6 +44,36 @@ const charCount = (str: string): RetrunType => {
     return result
 }
 
-console.log(charCount("aaaa")) //   {a: 4}
-console.log(charCount("Hello")) //  { H: 1, e: 1, l: 2, o: 1 }
-console.log(charCount("My phone number is 060818938"))
+/**
+ * Checks a character string if it's a lowercase string or a number
+ * @param char a single character string
+ * @returns boolean
+ */
+const isAlphaNumeric = (char: string): boolean => {
+    const code = char.charCodeAt(0)
+    if (
+        !(code > 47 && code < 58) && // numerice (0-9)
+        !(code > 96 && code < 123) // lower alphabets (a-z)
+    ) {
+        return false
+    }
+    return true
+}
+
+const charCountRefactored = (str: string): RetrunType => {
+    const object: RetrunType = {}
+
+    for (let char of str) {
+        char = char.toLowerCase()
+
+        if (isAlphaNumeric(char)) {
+            object[char] = ++object[char] || 1
+        }
+    }
+
+    return object
+}
+
+console.log(charCountRefactored("aaaa")) //   {a: 4}
+console.log(charCountRefactored("Hello")) //  { H: 1, e: 1, l: 2, o: 1 }
+console.log(charCountRefactored("My phone number is 060818938"))
